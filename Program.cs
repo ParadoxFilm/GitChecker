@@ -17,7 +17,6 @@ namespace GitChecker
         {
             Url = _Url;
         }
-
         public void GitCheck()
         {
             HttpRequest Request = new HttpRequest();
@@ -53,9 +52,7 @@ namespace GitChecker
                      i =>
                      {
                          int x = i;
-
                          Sites[i].GitCheck();
-
                          if (Sites[i].Git403)
                          {
                              lock (Locker)
@@ -85,7 +82,6 @@ namespace GitChecker
                                  lock (Locker)
                                  {
                                      ++CheckCount;
-
                                      Console.WriteLine(Sites[i].Url + " -> Git don't exist :( [{0}/{1}/{2}]",CheckGood,CheckCount,Sites.Count);
                                  }
                              }
@@ -94,23 +90,21 @@ namespace GitChecker
         }
         public void SiteAdd(string Url)
         {
-            Site N = new Site(Url);
-            Sites.Add(N);
+            Sites.Add(new Site(Url));
         }
         public void AddFromDump()
         {
-            string Dump = File.ReadAllText("in.txt");
-            string[] DumpArray = Dump.Split(new string[] {"\r\n"},StringSplitOptions.RemoveEmptyEntries);
-            for(int i=0; i<DumpArray.Length;++i)
-                SiteAdd(DumpArray[i]);
+            string dump = File.ReadAllLines("in.txt");
+            for(int i=0; i<dump.Length;++i)
+                SiteAdd(dump[i]);
         }
         public void SaveResult()
         {
-            string _Out = string.Empty;
+            string _out = string.Empty;
             for (int i = 0; i < Sites.Count;++i ) 
                 if (Sites[i].GitExist)
-                    _Out += Sites[i].Url+"\r\n";
-            File.WriteAllText("Result.txt", _Out);
+                    _out += Sites[i].Url+"\r\n";
+            File.WriteAllText("out.txt", _out);
         }
 
     }
@@ -119,7 +113,7 @@ namespace GitChecker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Нажмите Enter, чтобы начать...");
+            Console.WriteLine("Press Enter to start...");
             Console.ReadKey();
             Checker Now = new Checker();
             Now.AddFromDump();
