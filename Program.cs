@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using xNet;
 namespace GitChecker
 {
+    /*
+    Sorry for bullshit. Once I rewrite this code normally.
+    Now these are just crutches that violate all the concepts of normal programming.
+    */
     class Site
     {
         public string Url = null;
