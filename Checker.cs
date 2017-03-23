@@ -50,7 +50,7 @@ namespace GitChecker
                             lock (_lock)
                             {
                                 ++_checkCount;
-                                Console.WriteLine(Sites[i].Url + " -> Git don't exist :( [{0}/{1}/{2}]", _checkGood, _checkCount, Sites.Count);
+                                Console.WriteLine(Sites[i].Url + " -> Git doesn't exist :( [{0}/{1}/{2}]", _checkGood, _checkCount, Sites.Count);
                             }
                         }
                     }
